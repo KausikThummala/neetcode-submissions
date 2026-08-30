@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        //how to solve this 
+        //use a monotonic stack of indices
+        stack<int> st;
+        vector<int> ans(temperatures.size(),0);
+        for(int i=0;i<temperatures.size();i++){
+            while(!st.empty() && temperatures[st.top()]<temperatures[i]){
+                int idx=st.top();
+                st.pop();
+                ans[idx]=i-idx;
+            }
+            st.push(i);
+        }
+        return ans;
+        
+    }
+};
